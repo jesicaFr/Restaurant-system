@@ -1,0 +1,152 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run Restaurant API",
+			"type": "shell",
+			"command": "C:\\Program Files\\dotnet\\dotnet.exe run --project RestaurantManagement.Api",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Restaurant API",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:\\Program Files\\dotnet\\dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\"",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check dotnet",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" --info",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Restaurant API",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\"",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run Restaurant API 2",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://localhost:5000",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Build API",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" build \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\"",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run API in background",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && start \"Restaurant API\" \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://localhost:5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check port 5000",
+			"type": "shell",
+			"command": "netstat -ano | findstr :5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run API and log",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://127.0.0.1:5000 > api-run.log 2>&1",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check dotnet processes",
+			"type": "shell",
+			"command": "tasklist | findstr dotnet",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Inspect API output",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" exec --runtimeconfig RestaurantManagement.Api/bin/Debug/net10.0/RestaurantManagement.Api.runtimeconfig.json RestaurantManagement.Api/bin/Debug/net10.0/RestaurantManagement.Api.dll --urls http://127.0.0.1:5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Rebuild API",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" build \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\"",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run API after fix",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && start \"Restaurant API\" \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://127.0.0.1:5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check listening ports",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && netstat -ano | findstr :5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart API",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && taskkill /F /IM dotnet.exe > nul 2>&1 && start \"Restaurant API\" \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://127.0.0.1:5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check dotnet processes",
+			"type": "shell",
+			"command": "tasklist | findstr dotnet",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check port 5000",
+			"type": "shell",
+			"command": "netstat -ano | findstr :5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run API foreground",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://127.0.0.1:5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Restart API cleanly",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && taskkill /F /IM dotnet.exe > nul 2>&1 && start \"Restaurant API\" \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://127.0.0.1:5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check port 5000 after restart",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && netstat -ano | findstr :5000",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Run API persistent",
+			"type": "shell",
+			"command": "cd /d \"c:\\Users\\Jesica\\source\\restaurant-system\" && \"C:/PROGRA~1/dotnet/dotnet.exe\" run --project \"RestaurantManagement.Api/RestaurantManagement.Api.csproj\" --urls http://127.0.0.1:5000",
+			"isBackground": true,
+			"problemMatcher": []
+		}
+	]
+}

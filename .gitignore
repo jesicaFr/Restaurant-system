@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.tools/
+*.user
+*.suo
+*.log
+RestaurantManagement.Api/restaurant.db
+RestaurantManagement.Api/restaurant.db-shm
+RestaurantManagement.Api/restaurant.db-wal
