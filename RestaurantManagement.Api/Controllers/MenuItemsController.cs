@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Api.DTOs;
-using RestaurantManagement.Api.Models;
+using RestaurantManagement.Api.Mappers;
 using RestaurantManagement.Api.Services;
 
 namespace RestaurantManagement.Api.Controllers;
@@ -31,16 +31,7 @@ public class MenuItemsController(IMenuItemService menuItemService) : ControllerB
         [FromBody] CreateMenuItemDto dto,
         CancellationToken cancellationToken)
     {
-        var created = await menuItemService.CreateAsync(
-            new MenuItem
-            {
-                Name = dto.Name.Trim(),
-                Description = dto.Description.Trim(),
-                Price = dto.Price,
-                Quantity = dto.Quantity,
-                IsAvailable = dto.IsAvailable && dto.Quantity > 0
-            },
-            cancellationToken);
+        var created = await menuItemService.CreateAsync(dto, cancellationToken);
 
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created.ToDto());
     }
@@ -51,29 +42,10 @@ public class MenuItemsController(IMenuItemService menuItemService) : ControllerB
         [FromBody] UpdateMenuItemDto dto,
         CancellationToken cancellationToken)
     {
-        var current = await menuItemService.GetByIdAsync(id, cancellationToken);
-        if (current is null)
-        {
-            return NotFound();
-        }
-
-        var quantity = dto.Quantity ?? current.Quantity;
-        var isRestocking = current.Quantity == 0 && quantity > 0;
-        var updated = await menuItemService.UpdateAsync(
-            id,
-            new MenuItem
-            {
-                Name = dto.Name?.Trim() ?? current.Name,
-                Description = dto.Description?.Trim() ?? current.Description,
-                Price = dto.Price ?? current.Price,
-                Quantity = quantity,
-                IsAvailable =
-                    (isRestocking || (dto.IsAvailable ?? current.IsAvailable)) &&
-                    quantity > 0
-            },
-            cancellationToken);
-
-        return updated is null ? NotFound() : Ok(updated.ToDto());
+        var result = await menuItemService.UpdateAsync(id, dto, cancellationToken);
+        return result.IsSuccess
+            ? Ok(result.Value!.ToDto())
+            : this.ToErrorResult(result.Failure, result.Message);
     }
 
     [HttpDelete("{id:int}")]

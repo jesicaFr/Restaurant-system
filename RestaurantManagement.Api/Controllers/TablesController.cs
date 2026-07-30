@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using RestaurantManagement.Api.DTOs;
+using RestaurantManagement.Api.Mappers;
 using RestaurantManagement.Api.Models;
 using RestaurantManagement.Api.Services;
 
@@ -31,22 +32,13 @@ public class TablesController(ITableService tableService) : ControllerBase
         [FromBody] SaveRestaurantTableDto dto,
         CancellationToken cancellationToken)
     {
-        var normalizedNumber = dto.Number.Trim();
-        if (await tableService.NumberExistsAsync(normalizedNumber, cancellationToken: cancellationToken))
+        var result = await tableService.CreateAsync(dto, cancellationToken);
+        if (!result.IsSuccess)
         {
-            return Conflict("Ya existe una mesa con ese número.");
+            return this.ToErrorResult(result.Failure, result.Message);
         }
 
-        var created = await tableService.CreateAsync(
-            new RestaurantTable
-            {
-                Number = normalizedNumber,
-                Capacity = dto.Capacity,
-                Status = dto.IsOccupied ? RestaurantValues.Occupied : RestaurantValues.Available,
-                IsOccupied = dto.IsOccupied
-            },
-            cancellationToken);
-
+        var created = result.Value!;
         return CreatedAtAction(nameof(GetById), new { id = created.Id }, created.ToDto());
     }
 
@@ -56,24 +48,10 @@ public class TablesController(ITableService tableService) : ControllerBase
         [FromBody] SaveRestaurantTableDto dto,
         CancellationToken cancellationToken)
     {
-        var normalizedNumber = dto.Number.Trim();
-        if (await tableService.NumberExistsAsync(normalizedNumber, id, cancellationToken))
-        {
-            return Conflict("Ya existe una mesa con ese número.");
-        }
-
-        var updated = await tableService.UpdateAsync(
-            id,
-            new RestaurantTable
-            {
-                Number = normalizedNumber,
-                Capacity = dto.Capacity,
-                Status = dto.IsOccupied ? RestaurantValues.Occupied : RestaurantValues.Available,
-                IsOccupied = dto.IsOccupied
-            },
-            cancellationToken);
-
-        return updated is null ? NotFound() : Ok(updated.ToDto());
+        var result = await tableService.UpdateAsync(id, dto, cancellationToken);
+        return result.IsSuccess
+            ? Ok(result.Value!.ToDto())
+            : this.ToErrorResult(result.Failure, result.Message);
     }
 
     [HttpDelete("{id:int}")]

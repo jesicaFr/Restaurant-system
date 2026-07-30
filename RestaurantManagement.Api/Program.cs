@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using RestaurantManagement.Api.Data;
+using RestaurantManagement.Api.Repositories;
 using RestaurantManagement.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -32,6 +33,9 @@ builder.Services.AddScoped<ITableService, TableService>();
 builder.Services.AddScoped<IMenuItemService, MenuItemService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<ICashRegisterService, CashRegisterService>();
+builder.Services.AddScoped<ITableRepository, TableRepository>();
+builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 var app = builder.Build();
 

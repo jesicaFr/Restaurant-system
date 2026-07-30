@@ -9,7 +9,7 @@ public class CreateOrderDto
     public int TableId { get; set; }
 
     [Required]
-    public string Status { get; set; } = RestaurantValues.Pending;
+    public string Status { get; set; } = OrderStatus.Pending.ToDisplayName();
 
     [Required]
     public string PaymentMethod { get; set; } = RestaurantValues.Cash;
